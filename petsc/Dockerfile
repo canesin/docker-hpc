@@ -5,7 +5,6 @@ MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 # but I repeat this here for explicity)
 ENV CC clang
 ENV CXX clang++
-ENV CXXFLAGS "-std=c++11"
 
 # Compile PETSc with latest clang
 RUN apk add --no-cache curl build-base clang perl cmake python linux-headers && \
@@ -18,7 +17,6 @@ RUN apk add --no-cache curl build-base clang perl cmake python linux-headers && 
             CXX=$CXX \
             --prefix=/opt/petsc \
             --with-blas-lapack-lib=/opt/OpenBLAS/lib/libopenblas.a \
-            --with-cxx-dialect=C++11 \
             --download-mpich \
             --download-superlu_dist \
             --download-metis \
