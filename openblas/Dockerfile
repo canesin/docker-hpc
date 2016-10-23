@@ -7,6 +7,7 @@ ENV CXX clang++
 
 # Compile openblas with latest clang
 RUN apk add --no-cache curl unzip build-base gfortran clang perl linux-headers && \
+    cat /proc/cpuinfo && \
     curl -o /tmp/openblas.zip -sSL https://github.com/xianyi/OpenBLAS/archive/develop.zip && \
     mkdir -p /etc/ld.so.conf.d/ && \
     echo "/opt/OpenBLAS/lib" > /etc/ld.so.conf.d/openblas.conf && \
