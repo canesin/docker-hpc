@@ -6,7 +6,7 @@ MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 ENV CC clang
 ENV CXX clang++
 
-# Compile PETSc with latest clang
+# Compile SLEPc with latest clang
 RUN apk add --no-cache curl build-base clang perl cmake && \
     curl -o /tmp/slepc.tar.gz -sSL https://bitbucket.org/slepc/slepc/get/maint.tar.gz && \
     cd /tmp/ && \

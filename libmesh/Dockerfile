@@ -1,38 +1,37 @@
-FROM canesin/slepc-stable:latest
-MAINTAINER Fabio Cesar Canesin, fabio.canesin@gmail.com
+FROM canesin/slepc:latest
+MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 
-## Install libmesh from git master
-ADD https://github.com/libMesh/libmesh/archive/master.zip /tmp/master.zip
-WORKDIR /tmp
-# Build LibMesh
-RUN unzip -q master.zip
-WORKDIR /tmp/libmesh-master
-# Set PETSc and SLEPc paths
-ENV PETSC_DIR /opt/petsc
-ENV SLEPC_DIR /opt/slepc
-# Configure
-RUN ./configure --with-methods="opt pro dbg" \
-    	--prefix=/opt/libmesh \
-        --with-metis=PETSc \
-        --enable-tbb \
-        --enable-ifem \
-        --enable-cxx11 \
-        --enable-silent-rules \
-        --enable-unique-ptr \
-        --enable-unique-id \
-        --disable-warnings \
-        --disable-timestamps \
-        --disable-fortran \
-        --disable-pthreads \
-        --disable-openmp \
-        --disable-maintainer-mode
-# Buld and test
-RUN make -j$(nproc)
-RUN make install -j$(nproc)
-RUN make installcheck -j$(nproc) METHODS=opt
-# Add LIBMESH_DIR to env variables
-ENV LIBMESH_DIR /opt/libmesh
-ENV PATH $LIBMESH_DIR/bin:$PATH
-# Clean
-RUN rm -rf /tmp/*
+# User clang as default compiler (this is redudant from canesin/openblas
+# but I repeat this here for explicity)
+ENV CC clang
+ENV CXX clang++
+
+# Compile LibMesh with latest clang
+RUN apk add --no-cache curl build-base clang unzip && \
+    curl -o /tmp/libmesh.zip -sSL https://github.com/libMesh/libmesh/archive/master.zip && \
+    cd /tmp/ && \
+    unzip libmesh.zip && \
+    cd `ls | grep libmesh` && \
+    ./configure --with-methods="opt dbg" \
+                --prefix=/opt/libmesh \
+                --with-metis=PETSc \
+                --enable-ifem \
+                --enable-cxx11 \
+                --enable-silent-rules \
+                --enable-unique-ptr \
+                --enable-unique-id \
+                --disable-warnings \
+                --disable-timestamps \
+                --disable-fortran \
+                --disable-pthreads \
+                --disable-openmp \
+                --disable-maintainer-mode && \
+    make -j$(nproc) && \
+    make install -j$(nproc) && \
+    make installcheck -j$(nproc) METHODS=opt && \
+    echo "export LIBMESH_DIR=/opt/libmesh" >> $HOME/.bashrc && \
+    source $HOME/.bashrc && \
+    apk del curl build-base clang unzip && \
+    rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
+
 WORKDIR /opt
