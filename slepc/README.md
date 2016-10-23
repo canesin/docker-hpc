@@ -1,9 +1,10 @@
-## PETSc docker image
+## SLEPc docker image
 
-[![](https://imagelayers.io/badge/canesin/petsc:latest.svg)](https://imagelayers.io/?images=canesin/petsc:latest)
+[![](https://imagelayers.io/badge/canesin/slepc:latest.svg)](https://imagelayers.io/?images=canesin/slepc:latest)
 
-Install at /opt/petsc , it is built from on canesin/openblas using clang as compiler.
+Install at /opt/slepc, it is built from on canesin/openblas using clang as compiler.
 
+- SLEPc master from git
 - PETSc latest stable (3.7.x), AVX2 optimized
 - OpenBLAS develop, AVX2 optimized
 - MPICH 3.1.x
@@ -16,8 +17,8 @@ Install at /opt/petsc , it is built from on canesin/openblas using clang as comp
 
 Build and start bash in the container:
 ```bash
-$ docker pull canesin/petsc
-$ docker run --rm -it canesin/petsc bash
+$ docker pull canesin/slepc
+$ docker run --rm -it canesin/slepc bash
 ```
 
 ## License
