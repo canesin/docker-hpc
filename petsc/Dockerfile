@@ -7,7 +7,7 @@ ENV CC clang
 ENV CXX clang++
 
 # Compile PETSc with latest clang
-RUN apk add --no-cache curl build-base clang perl cmake python linux-headers && \
+RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-headers && \
     curl -o /tmp/petsc.tar.gz -sSL http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.7.tar.gz && \
     cd /tmp/ && \
     tar xzf petsc.tar.gz && \
@@ -16,7 +16,7 @@ RUN apk add --no-cache curl build-base clang perl cmake python linux-headers && 
             CC=$CC \
             CXX=$CXX \
             --prefix=/opt/petsc \
-            --with-blas-lapack-lib=/opt/OpenBLAS/lib/libopenblas.a \
+            --with-blas-lapack-dir=/opt/OpenBLAS/ \
             --download-mpich \
             --download-superlu_dist \
             --download-metis \
@@ -30,5 +30,5 @@ RUN apk add --no-cache curl build-base clang perl cmake python linux-headers && 
     make install && \
     echo "export PETSC_DIR=/opt/petsc" >> $HOME/.bashrc && \
     source $HOME/.bashrc && \
-    apk del curl build-base clang perl cmake python linux-headers && \
+    apk del curl build-base gfortran clang perl cmake python linux-headers && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
