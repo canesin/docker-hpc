@@ -1,10 +1,12 @@
 FROM canesin/slepc:latest
 MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 
-# User clang as default compiler (this is redudant from canesin/openblas
+# User clang as default compiler (this is redudant from canesin/slepc
 # but I repeat this here for explicity)
 ENV CC clang
 ENV CXX clang++
+ENV PETSC_DIR /opt/petsc
+ENV SLEPC_DIR /opt/slepc
 
 # Compile LibMesh with latest clang
 RUN apk add --no-cache curl build-base clang unzip && \
@@ -29,9 +31,8 @@ RUN apk add --no-cache curl build-base clang unzip && \
     make -j$(nproc) && \
     make install -j$(nproc) && \
     make installcheck -j$(nproc) METHODS=opt && \
-    echo "export LIBMESH_DIR=/opt/libmesh" >> $HOME/.bashrc && \
-    source $HOME/.bashrc && \
     apk del curl build-base clang unzip && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
 
-WORKDIR /opt
+# Setup LibMesh location
+ENV LIBMESH_DIR /opt/libmesh

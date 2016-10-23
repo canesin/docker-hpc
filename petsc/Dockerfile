@@ -29,7 +29,8 @@ RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-he
             FOPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' && \
     make && \
     make install && \
-    echo "export PETSC_DIR=/opt/petsc" >> $HOME/.bashrc && \
-    source $HOME/.bashrc && \
     apk del curl build-base gfortran clang perl cmake python linux-headers && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
+
+# Setup PETSc location
+ENV PETSC_DIR /opt/petsc

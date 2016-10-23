@@ -1,10 +1,11 @@
 FROM canesin/petsc:latest
 MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 
-# User clang as default compiler (this is redudant from canesin/openblas
+# User clang as default compiler (this is redudant from canesin/petsc
 # but I repeat this here for explicity)
 ENV CC clang
 ENV CXX clang++
+ENV PETSC_DIR /opt/petsc
 
 # Compile SLEPc with latest clang
 RUN apk add --no-cache curl build-base clang perl cmake python && \
@@ -15,7 +16,8 @@ RUN apk add --no-cache curl build-base clang perl cmake python && \
     ./configure --prefix=/opt/slepc && \
     make
     make install && \
-    echo "export SLEPC_DIR=/opt/slepc" >> $HOME/.bashrc && \
-    source $HOME/.bashrc && \
     apk del curl build-base clang perl cmake python && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
+
+# Setup SLEPc location
+ENV SLEPC_DIR /opt/slepc
