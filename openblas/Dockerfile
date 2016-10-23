@@ -1,5 +1,5 @@
 FROM alpine:edge
-MAINTAINER Fabio Cesar Canesin, fabio.canesin@gmail.com
+MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 
 # User clang as default compiler
 ENV CC clang
@@ -13,7 +13,7 @@ RUN apk add --no-cache curl unzip build-base clang perl linux-headers && \
     cd /tmp/ && \
     unzip openblas.zip && \
     cd `ls | grep OpenBLAS` && \
-    make TARGET=SANDYBRIDGE NO_AFFINITY=1 NUM_THREADS=1 && \
+    make TARGET=HASWELL NO_AFFINITY=1 NUM_THREADS=1 && \
     make install && \
     apk del curl unzip build-base clang perl linux-headers && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*

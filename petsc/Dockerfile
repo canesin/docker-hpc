@@ -1,0 +1,35 @@
+FROM canesin/openblas:latest
+MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
+
+# User clang as default compiler (this is redudant from canesin/openblas
+# but I repeat this here for explicity)
+ENV CC clang
+ENV CXX clang++
+
+# Compile PETSc with latest clang
+RUN apk add --no-cache curl unzip build-base clang perl cmake python linux-headers && \
+    curl -o /tmp/petsc.tar.gz -sSL http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.6.tar.gz && \
+    cd /tmp/ && \
+    tar xzf petsc.tar.gz && \
+    cd `ls | grep petsc` && \
+    ./configure PETSC_ARCH=dorcker-opt \
+            CC=$CC \
+            CXX=$CXX \
+            --prefix=/opt/petsc \
+            --with-blas-lapack-lib=/opt/OpenBLAS/lib/libopenblas.a \
+            --with-cxx-dialect=C++11 \
+            --download-mpich \
+            --download-superlu_dist \
+            --download-metis \
+            --download-parmetis \
+            --download-hypre \
+            --with-debugging=0 \
+            COPTFLAGS='-O2 -march=core-avx2 -mtune=core-avx2' \
+            CXXOPTFLAGS='-O2 -march=core-avx2 -mtune=core-avx2' \
+            FOPTFLAGS='-O2 -march=core-avx2 -mtune=core-avx2' && \
+    make && \
+    make install && \
+    echo "export PETSC_DIR=/opt/petsc" >> $HOME/.bashrc && \
+    source $HOME/.bashrc && \
+    apk del curl unzip build-base clang perl cmake python linux-headers && \
+    rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
