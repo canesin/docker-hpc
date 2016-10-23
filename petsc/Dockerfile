@@ -23,9 +23,9 @@ RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-he
             --download-parmetis \
             --download-hypre \
             --with-debugging=0 \
-            COPTFLAGS='-O2 -march=core-avx2 -mtune=core-avx2' \
-            CXXOPTFLAGS='-O2 -march=core-avx2 -mtune=core-avx2' \
-            FOPTFLAGS='-O2 -march=core-avx2 -mtune=core-avx2' && \
+            COPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' \
+            CXXOPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' \
+            FOPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' && \
     make && \
     make install && \
     echo "export PETSC_DIR=/opt/petsc" >> $HOME/.bashrc && \

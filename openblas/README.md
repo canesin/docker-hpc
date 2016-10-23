@@ -2,7 +2,7 @@
 
 [![](https://imagelayers.io/badge/canesin/openblas:latest.svg)](https://imagelayers.io/?images=canesin/openblas:latest)
 
-Docker image based on alpine:edge for OpenBLAS git, AVX2 (HASWELL) target.
+Docker image based on alpine:edge for OpenBLAS git, AVX (SANDYBRIDGE) target.
 Library is installed at /opt/OpenBLAS/ clang used as compiler
 
 ## Usage
