@@ -16,7 +16,8 @@ RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-he
             CC=$CC \
             CXX=$CXX \
             --prefix=/opt/petsc \
-            --with-blas-lapack-dir=/opt/OpenBLAS/ \
+            --known-64-bit-blas-indices=true \
+            --with-blas-lapack-lib=/opt/OpenBLAS/lib/libopenblas.a \
             --download-mpich \
             --download-superlu_dist \
             --download-metis \
