@@ -1,36 +1,30 @@
-## PETSc stable docker image
+## PETSc docker image
 
-Library is displonible at /opt/petsc
-Built from on canesin:openblas-git
+[![](https://imagelayers.io/badge/canesin/petsc:latest.svg)](https://imagelayers.io/?images=canesin/petsc:latest)
 
-- PETSc latest stable (3.6.x), AVX optimized
-- OpenBLAS develop, AVX optimized
+Install at /opt/petsc , it is built from on canesin:openblas-git using clang as compiler.
+
+- PETSc latest stable (3.6.x), AVX2 optimized
+- OpenBLAS develop, AVX2 optimized
 - MPICH 3.1.x
 - METIS 5.1.x
 - ParMETIS 4.0.x
 - HYPRE 2.10.x
-- SuperLU_dist 4.1
-- Clang-3.8
-- Clang-tidy-3.8
-- Clang-format-3.8
-- Intel TBB
-- Cmake
-- Make
-- Perl
+- SuperLU_dist 4.x
 
 ## Usage
 
 Build and start bash in the container:
 ```bash
-$ docker pull canesin/petsc-stable
-$ docker run --rm -it canesin/petsc-stable bash
+$ docker pull canesin/petsc
+$ docker run --rm -it canesin/petsc bash
 ```
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Fábio César Canesin <fabio.canesin@gmail.com>
+Copyright (c) 2016 Fábio César Canesin <fabio.canesin@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
