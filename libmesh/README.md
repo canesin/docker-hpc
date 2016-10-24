@@ -5,14 +5,14 @@
 Install at /opt/libmesh , it is built from on canesin/slepc using clang as compiler.
 
 - LibMesh from git master
-- SLEPc from git maint
-- PETSc latest stable (3.7.x), AVX optimized
-    - MPICH 3.1.x
-    - METIS 5.1.x
-    - ParMETIS 4.0.x
-    - HYPRE 2.10.x
-    - SuperLU_dist 4.1
-- OpenBLAS develop, AVX2 optimized
+- SLEPc 3.7.x
+- PETSc 3.6.x, AVX optimized
+    - MPICH
+    - METIS
+    - ParMETIS
+    - HYPRE
+    - SuperLU_dist
+- OpenBLAS develop, AVX optimized
 
 ```bash
 ./configure --with-methods="opt dbg" \

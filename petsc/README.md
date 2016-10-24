@@ -4,13 +4,13 @@
 
 Install at /opt/petsc , it is built from on canesin/openblas using clang as compiler.
 
-- PETSc latest stable (3.7.x), AVX optimized
 - OpenBLAS develop, AVX optimized
-- MPICH 3.1.x
-- METIS 5.1.x
-- ParMETIS 4.0.x
-- HYPRE 2.10.x
-- SuperLU_dist 4.x
+- PETSc 3.6.x, AVX optimized
+    - MPICH
+    - METIS
+    - ParMETIS
+    - HYPRE
+    - SuperLU_dist
 
 ## Usage
 
