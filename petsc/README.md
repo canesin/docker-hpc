@@ -5,7 +5,7 @@
 Install at /opt/petsc , it is built from on canesin/openblas using clang as compiler.
 
 - OpenBLAS develop, AVX optimized
-- PETSc 3.6.x, AVX optimized
+- PETSc 3.7.x, AVX optimized
     - MPICH
     - METIS
     - ParMETIS

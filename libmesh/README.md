@@ -6,7 +6,7 @@ Install at /opt/libmesh , it is built from on canesin/slepc using clang as compi
 
 - LibMesh from git master
 - SLEPc 3.7.x
-- PETSc 3.6.x, AVX optimized
+- PETSc 3.7.x, AVX optimized
     - MPICH
     - METIS
     - ParMETIS

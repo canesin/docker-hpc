@@ -6,7 +6,7 @@ Install at /opt/slepc, it is built from on canesin/openblas using clang as compi
 
 - SLEPc 3.7.x
 - OpenBLAS develop, AVX optimized
-- PETSc 3.6.x, AVX optimized
+- PETSc 3.7.x, AVX optimized
     - MPICH
     - METIS
     - ParMETIS
