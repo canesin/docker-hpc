@@ -27,8 +27,8 @@ RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-he
             COPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' \
             CXXOPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' \
             FOPTFLAGS='-O2 -march=ivybridge -mtune=ivybridge' && \
-    make && \
-    make install && \
+    make -j$(nproc) && \
+    make install -j$(nproc) && \
     apk del curl build-base gfortran clang perl cmake python linux-headers && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
 
