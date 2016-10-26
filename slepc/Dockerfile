@@ -14,7 +14,7 @@ RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-he
     tar xzf slepc.tar.gz && \
     cd `ls | grep slepc` && \
     ./configure --prefix=/opt/slepc && \
-    make
+    make && \
     make install && \
     apk del curl build-base gfortran clang perl cmake python linux-headers && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
