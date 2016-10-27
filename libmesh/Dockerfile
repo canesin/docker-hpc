@@ -9,7 +9,7 @@ ENV PETSC_DIR /opt/petsc
 ENV SLEPC_DIR /opt/slepc
 
 # Compile LibMesh with latest clang
-RUN apk add --no-cache curl build-base clang unzip && \
+RUN apk add --no-cache curl build-base clang unzip cmake && \
     curl -o /tmp/libmesh.zip -sSL https://github.com/libMesh/libmesh/archive/master.zip && \
     cd /tmp/ && \
     unzip libmesh.zip && \
@@ -28,10 +28,10 @@ RUN apk add --no-cache curl build-base clang unzip && \
                 --disable-pthreads \
                 --disable-openmp \
                 --disable-maintainer-mode && \
-    make -j$(nproc) && \
-    make install -j$(nproc) && \
-    make installcheck -j$(nproc) METHODS=opt && \
-    apk del curl build-base clang unzip && \
+    make && \
+    make install && \
+    make installcheck METHODS=opt && \
+    apk del curl build-base clang unzip cmake && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
 
 # Setup LibMesh location
