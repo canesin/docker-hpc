@@ -14,9 +14,10 @@ RUN apk add --no-cache curl build-base clang unzip cmake && \
     cd /tmp/ && \
     unzip libmesh.zip && \
     cd `ls | grep libmesh` && \
-    ./configure --with-methods="opt dbg" \
-                --prefix=/opt/libmesh \
+    ./configure --prefix=/opt/libmesh \
+                --with-methods="opt dbg" \
                 --with-metis=PETSc \
+                --with-mpi=/opt/petsc \
                 --enable-ifem \
                 --enable-cxx11 \
                 --enable-silent-rules \
