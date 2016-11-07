@@ -8,9 +8,8 @@ ENV CXX clang++
 
 # Compile PETSc with latest clang
 RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-headers && \
-    curl -o /tmp/petsc.tar.gz -sSL http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.7.tar.gz && \
     cd /tmp/ && \
-    tar xzf petsc.tar.gz && \
+    curl -L http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-3.7.tar.gz | tar xz && \
     cd `ls | grep petsc` && \
     ./configure PETSC_ARCH=dorcker-opt \
             CC=$CC \

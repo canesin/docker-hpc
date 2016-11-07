@@ -9,9 +9,8 @@ ENV PETSC_DIR /opt/petsc
 
 # Compile SLEPc with latest clang
 RUN apk add --no-cache curl build-base gfortran clang perl cmake python linux-headers && \
-    curl -o /tmp/slepc.tar.gz -sSL https://bitbucket.org/slepc/slepc/get/maint.tar.gz && \
     cd /tmp/ && \
-    tar xzf slepc.tar.gz && \
+    curl -L https://bitbucket.org/slepc/slepc/get/maint.tar.gz | tar xz && \
     cd `ls | grep slepc` && \
     ./configure --prefix=/opt/slepc && \
     make && \

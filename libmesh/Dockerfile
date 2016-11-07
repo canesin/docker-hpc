@@ -7,17 +7,16 @@ ENV CC clang
 ENV CXX clang++
 ENV PETSC_DIR /opt/petsc
 ENV SLEPC_DIR /opt/slepc
+ENV CPATH /opt/OpenBLAS/include:/opt/petsc/include:/opt/slepc/include
 
 # Compile LibMesh with latest clang
-RUN apk add --no-cache curl build-base clang unzip cmake && \
-    curl -o /tmp/libmesh.zip -sSL https://github.com/libMesh/libmesh/archive/master.zip && \
+RUN apk add --no-cache curl build-base clang cmake && \
     cd /tmp/ && \
-    unzip libmesh.zip && \
+    curl -L https://github.com/libMesh/libmesh/archive/master.tar.gz | tar xz && \
     cd `ls | grep libmesh` && \
     ./configure --prefix=/opt/libmesh \
                 --with-methods="opt dbg" \
                 --with-metis=PETSc \
-                --with-mpi=/opt/petsc \
                 --enable-ifem \
                 --enable-cxx11 \
                 --enable-silent-rules \
@@ -32,7 +31,7 @@ RUN apk add --no-cache curl build-base clang unzip cmake && \
     make && \
     make install && \
     make installcheck METHODS=opt && \
-    apk del curl build-base clang unzip cmake && \
+    apk del curl build-base clang cmake && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
 
 # Setup LibMesh location
