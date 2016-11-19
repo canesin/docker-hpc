@@ -12,7 +12,7 @@ ENV CPATH /opt/OpenBLAS/include:/opt/petsc/include:/opt/slepc/include
 # Compile LibMesh with latest clang
 RUN apk add --no-cache curl build-base clang cmake && \
     cd /tmp/ && \
-    curl -L https://github.com/canesin/libmesh/archive/blas_64bit_int.tar.gz | tar xz && \
+    curl -L https://github.com/libMesh/libmesh/archive/master.tar.gz | tar xz && \
     cd `ls | grep libmesh` && \
     ./configure --prefix=/opt/libmesh \
                 --with-methods="opt dbg" \
