@@ -15,7 +15,7 @@ RUN apk add --no-cache curl build-base clang cmake && \
     curl -L https://github.com/jwpeterson/libmesh/archive/petsc_blas_int.tar.gz | tar xz && \
     cd `ls | grep libmesh` && \
     ./configure --prefix=/opt/libmesh \
-                --with-methods="opt dbg" \
+                --with-methods="opt" \
                 --with-metis=PETSc \
                 --enable-ifem \
                 --enable-cxx11 \
