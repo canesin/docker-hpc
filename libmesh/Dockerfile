@@ -28,8 +28,8 @@ RUN apk add --no-cache curl build-base clang cmake && \
                 --disable-pthreads \
                 --disable-openmp \
                 --disable-maintainer-mode && \
-    make && \
-    make install && \
+    make
+RUN make install && \
     make installcheck METHODS=opt && \
     apk del curl build-base clang cmake && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
