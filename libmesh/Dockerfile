@@ -23,12 +23,12 @@ RUN apk add --no-cache curl build-base clang cmake && \
                 --enable-silent-rules \
                 --enable-unique-ptr \
                 --enable-unique-id \
-                --disable-warnings \
                 --disable-timestamps \
                 --disable-fortran \
                 --disable-pthreads \
                 --disable-openmp \
-		--disable-netcdf \
+		--disable-netcdf-4 \
+                --disable-dap \
                 --disable-maintainer-mode && \
     make
 RUN make install && \
