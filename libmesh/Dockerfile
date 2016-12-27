@@ -12,13 +12,14 @@ ENV CPATH /opt/OpenBLAS/include:/opt/petsc/include:/opt/slepc/include
 # Compile LibMesh with latest clang
 RUN apk add --no-cache curl build-base clang cmake && \
     cd /tmp/ && \
-    curl -L https://github.com/jwpeterson/libmesh/archive/petsc_blas_int.tar.gz | tar xz && \
+    curl -L https://github.com/libmesh/libmesh/archive/master.tar.gz | tar xz && \
     cd `ls | grep libmesh` && \
     ./configure --prefix=/opt/libmesh \
-                --with-methods="opt" \
+                --with-methods="opt dbg" \
                 --with-metis=PETSc \
                 --enable-ifem \
                 --enable-cxx11 \
+                --enable-perflog \
                 --enable-silent-rules \
                 --enable-unique-ptr \
                 --enable-unique-id \
@@ -27,6 +28,7 @@ RUN apk add --no-cache curl build-base clang cmake && \
                 --disable-fortran \
                 --disable-pthreads \
                 --disable-openmp \
+		--disable-netcdf \
                 --disable-maintainer-mode && \
     make
 RUN make install && \
