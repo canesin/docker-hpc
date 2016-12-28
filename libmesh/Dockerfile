@@ -7,7 +7,6 @@ ENV CC clang
 ENV CXX clang++
 ENV PETSC_DIR /opt/petsc
 ENV SLEPC_DIR /opt/slepc
-ENV CPATH /opt/OpenBLAS/include:/opt/petsc/include:/opt/slepc/include
 
 # Compile LibMesh with latest clang
 RUN apk add --no-cache curl build-base clang cmake && \
@@ -30,9 +29,8 @@ RUN apk add --no-cache curl build-base clang cmake && \
 		--disable-netcdf-4 \
                 --disable-dap \
                 --disable-maintainer-mode && \
-    make
-RUN make install && \
-    make installcheck METHODS=opt && \
+    make && make install && \
+    make installcheck && \
     apk del curl build-base clang cmake && \
     rm -rf /usr/share/man/* /tmp/* /var/cache/apk/*
 
