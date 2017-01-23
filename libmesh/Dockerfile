@@ -14,21 +14,18 @@ RUN apk add --no-cache curl build-base clang cmake && \
     curl -L https://github.com/libmesh/libmesh/archive/master.tar.gz | tar xz && \
     cd `ls | grep libmesh` && \
     ./configure --prefix=/opt/libmesh \
-                --with-methods="opt dbg" \
-                --with-metis=PETSc \
-                --enable-ifem \
-                --enable-cxx11 \
-                --enable-perflog \
-                --enable-silent-rules \
-                --enable-unique-ptr \
-                --enable-unique-id \
-                --disable-timestamps \
-                --disable-fortran \
-                --disable-pthreads \
-                --disable-openmp \
-		--disable-netcdf-4 \
-                --disable-dap \
-                --disable-maintainer-mode && \
+        --with-methods="opt dbg" \
+        --with-metis=PETSc \
+        --enable-exodus \
+        --enable-ifem \
+        --enable-cxx11 \
+        --enable-perflog \
+        --enable-silent-rules \
+        --enable-unique-ptr \
+        --enable-unique-id \
+        --disable-fortran \
+        --disable-pthreads \
+        --disable-maintainer-mode && \
     make && make install && \
     make installcheck && \
     apk del curl build-base clang cmake && \
