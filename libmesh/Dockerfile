@@ -3,8 +3,8 @@ MAINTAINER Fabio C. Canesin, fabio.canesin@gmail.com
 
 # User clang as default compiler (this is redudant from canesin/slepc
 # but I repeat this here for explicity)
-ENV CC clang
-ENV CXX clang++
+ENV CC /opt/petsc/mpicc
+ENV CXX /opt/petsc/mpic++
 ENV PETSC_DIR /opt/petsc
 ENV SLEPC_DIR /opt/slepc
 
